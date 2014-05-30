@@ -1,0 +1,46 @@
+package lib;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Scanner;
+
+public class idades {
+	
+	public static int calculaDatas(String datai, Calendar dataf){  
+		
+		GregorianCalendar dataNas = new GregorianCalendar(); //definir a variável inicio de acordo com o calendário gregoriano
+	    GregorianCalendar hoje = new GregorianCalendar(); //definir a variável hoje de acordo com o calendário gregoriano
+	    SimpleDateFormat formatoData = new SimpleDateFormat ("dd/MM/yyyy"); //definir formato da data
+        
+        try {
+        	dataNas.setTime(formatoData.parse(datai)); //converte a data inicial para o formato temporal dos dias (24 horas)
+            
+        } catch (java.text.ParseException e){
+        	
+        } 
+        
+        long datain = dataNas.getTimeInMillis(); //obter os milisegundos da data inicial
+        long dataout = hoje.getTimeInMillis(); //obter os milisegundos da data de hoje
+        int anos = (int) ((((dataout-datain) / 86400000)) / 365); //divisão da diferença de datas em milisegundos pelo número de milisegundos num dia
+        
+        return anos;  
+    } 
+	
+	public static void main(String[] args) {
+	    	
+	    Scanner inserirData = new Scanner(System.in); //inserir teclado
+	    	
+	    System.out.println("Calculo da Idade\n");
+   	    System.out.println("Insira a sua data de nascimento no seguinte formato: (DD/MM/AAAA)");
+   	    String data1 = inserirData.nextLine(); // lê data inicial
+	    System.out.println("Insira a data final no seguinte formato: (DD/MM/AAAA)");
+        Calendar data2 = GregorianCalendar.getInstance();
+	        
+        int anos = calculaDatas(data1, data2);
+	        
+        System.out.println("A sue idade é: " + anos + " anos!");
+	    
+	}
+	
+}
