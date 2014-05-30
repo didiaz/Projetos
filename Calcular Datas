@@ -1,0 +1,44 @@
+package lib;
+
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+import java.util.Scanner;
+
+public class calculoData {
+	
+	public static int calculaDatas(String datai, String dataf){  
+		
+		GregorianCalendar inicio = new GregorianCalendar(); //definir a variável inicio de acordo com o calendário gregoriano
+	    GregorianCalendar fim = new GregorianCalendar(); //definir a variável fim de acordo com o calendário gregoriano
+	    SimpleDateFormat formatoData = new SimpleDateFormat ("dd/MM/yyyy"); //definir formato da data
+        
+        try {
+        	inicio.setTime(formatoData.parse(datai)); //converte a data inicial para o formato temporal dos dias (24 horas)
+            fim.setTime(formatoData.parse(dataf));  //converte a data final para o formato temporal dos dias (24 horas)
+            
+        } catch (java.text.ParseException e){
+        	
+        } 
+        
+        long datain = inicio.getTimeInMillis(); //obter os milisegundos da data inicial
+        long dataout = fim.getTimeInMillis(); //obter os milisegundos da data final
+        int dias = (int) (((dataout-datain) / 86400000)); //divisão da diferença de datas em milisegundos pelo número de milisegundos num dia
+        
+        return dias;  
+    } 
+	
+	public static void main(String[] args) {
+	    	
+	    Scanner inserirData = new Scanner(System.in); //inserir teclado
+	    	
+	    System.out.println("Calculo de Nº de dias entre Datas\n");
+   	    System.out.println("Insira a data inicial no seguinte formato: (DD/MM/AAAA)");
+   	    String data1 = inserirData.nextLine(); // lê data inicial
+	    System.out.println("Insira a data final no seguinte formato: (DD/MM/AAAA)");
+        String data2 = inserirData.nextLine(); // lê data final
+	        
+        int dias = calculaDatas(data1, data2);
+	        
+        System.out.println("Entre a data inicial e final são " + dias + " dias de diferença.");
+	    
+	}
